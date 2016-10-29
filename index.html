@@ -1,0 +1,95 @@
+<!-- 带控制器的视频标签, 不同浏览器有不同的文件格式要求
+所以用 2 个 source 标签指定不同的视频格式
+<video width="300" height="200" controls="controls">
+    <source src="movie.mp4">
+    <source src="movie.ogv">
+</video>
+
+
+带控制器的音频标签, 不同浏览器有不同的文件格式要求
+所以用 2 个 source 标签指定不同的音频格式
+<audio id='id-audio-player' controls="controls">
+  <source src="audio.ogg">
+  <source src="audio.mp3">
+</audio >
+
+
+audio 基本操作如下
+var a = document.querySelector('#id-audio-player')
+a.play()
+a.pause()
+a.autoplay
+a.src
+a.volume [0-1]
+a.duration time: 秒
+a.currentTime
+<audio src="Australia.ogg"></audio>-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MUSIC Player</title>
+        <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+        <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+        <link rel="stylesheet" href="music.css" media="screen" title="no title">
+        <script src="music.js"></script>
+        <script>
+            $('document').ready(function(){
+                var __main = musicPlayer
+                __main()
+            })
+        </script>
+    </head>
+    <body>
+        <audio id="id-audio-player" controls="controls">
+            <source src="song/Australia.ogg">
+        </audio >
+        <div class="BBg-music-position">
+            <div class="BBg-music-player">
+                <div class="BBg-music-contLeft">
+                    <i class="BBg-contLeft-prev BBg-music-contMargin-i fa fa-step-backward fa-1x" data-action="prev"></i>
+                    <i class="BBg-contLeft-pause BBg-music-contMargin-i fa fa-play-circle-o fa-2x" data-action="play"></i>
+                    <i class="BBg-contLeft-next BBg-music-contMargin-i fa fa-step-forward fa-1x" data-action="next"></i>
+                </div>
+                <div class="BBg-music-pic">
+                    <img src="bananas.jpg" width="100%" height="100%" alt="" />
+                </div>
+                <div class="BBg-music-play">
+                    <div class="BBg-music-info">
+                        <a id=id-a-song href="https://www.baidu.com/s?ie=UTF-8&wd=name" target="_Blank">
+                            <span class="BBg-music-song">song</span>
+                        </a>
+                        <a id=id-a-singer href="https://www.baidu.com/s?ie=UTF-8&wd=singer" target="_Blank">
+                            <span class="BBg-music-singer">singer</span>
+                        </a>
+                    </div>
+                    <div class="BBg-music-bar">
+                        <div class="BBg-music-range">
+                            <input id="id-input-SlideBar" type="range" name="name" min=0 max=100 value=0 step="0.25">
+                            <!-- <portport></portport> -->
+                        </div>
+                        <span class="BBg-music-timeIndica"><span class="BBg-music-curTime">0:00</span>/4:00</span>
+                    </div>
+                </div>
+                <div class="BBg-music-contRight">
+                    <input id="id-input-vol" type="range" name="name" value="8" min=0 max=10>
+                    <i class="BBg-contRight-vol BBg-music-contMargin-i  fa fa-volume-up"></i>
+                    <i class="BBg-contRight-loop BBg-music-contMargin-i  fa fa-refresh"></i>
+                    <span class="BBg-music-loopOne">1</span>
+                    <i class="BBg-contRight-like BBg-music-contMargin-i  fa fa-heart-o"></i>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
