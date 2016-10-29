@@ -33,17 +33,6 @@ MusicPlayer.prototype.nowSong = function() {
     return songInfo
 }
 
-var prevSong = function(element) {
-    $('audio').unbind('timeupdate')
-    var mode = {
-        loop: playLoopPrev,
-        random: playRandom,
-        loopOne: playLoopOne,
-    }
-    var type = player.playMode
-    mode[type]()
-}
-
 var playLoopPrev = function() {
     var length = player.songs.length
     if(player.nowId != 0) {
@@ -73,6 +62,17 @@ var playRandom = function() {
 
 var playLoopOne = function() {
     initMusicPlayer()
+}
+
+var prevSong = function(element) {
+    $('audio').unbind('timeupdate')
+    var mode = {
+        loop: playLoopPrev,
+        random: playRandom,
+        loopOne: playLoopOne,
+    }
+    var type = player.playMode
+    mode[type]()
 }
 
 var nextSong = function(element) {
@@ -113,7 +113,7 @@ var timeFormatBySecs = function(seconds) {
 }
 
 var setCurTime = function(value) {
-    log('setCurTime')
+    // log('setCurTime')
     var curTime = $('audio')[0].currentTime
     var t = timeFormatBySecs(curTime)
     $('.BBg-music-curTime').text(t)
@@ -121,12 +121,12 @@ var setCurTime = function(value) {
 
 // element 是 DOM 型的
 var setport = function(element, value) {
+    // log('setport')
     var value = Number(value)
-    log('setport')
     $(element).val(value)
-    log('value is', value)
+    // 百分比
     var presVal = value / (element.max - element.min)
-    log(presVal)
+    // log(presVal)
     var background = `linear-gradient(to right ,#c91818 0%,#c91818 ${presVal * 100}%,#5b5b5b ${presVal* 100 }%, #5b5b5b 100%)`
     $(element).css('background', background)
 }
@@ -161,7 +161,14 @@ var bindPlayerContLeft = function(){
             play: playSong,
             pause: pauseSong,
         }
-        actions[type](this)
+        if( player.playMode == 'loopOne' && (type == 'prev' || type == 'next')) {
+            // log('loopOne')
+            $('audio').unbind('timeupdate')
+            type == 'prev' ? playLoopPrev() : true
+            type == 'next' ? playLoopNext() : true
+        } else {
+            actions[type](this)
+        }
     })
 }
 
@@ -178,12 +185,12 @@ var bindSlideBar = function() {
 
 var bindTimeUpdate = function() {
     $('audio').on('timeupdate', function(){
-        log('timeupdate')
+        // log('timeupdate')
         var curTime = this.currentTime
         var value = curTime / this.duration * 100
         var e = $('#id-input-SlideBar')[0]
         // log(e, value)
-        log('time update', value)
+        // log('time update', value)
         setport(e, value)
         setCurTime(value)
     })
