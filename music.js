@@ -15,6 +15,7 @@ MusicPlayer.prototype.files = function(files) {
     for (var i = 0; i < files.length; i++) {
         files[i].id = i
         files[i].like = false
+        files[i].time
     }
     return files
 }
@@ -31,6 +32,19 @@ MusicPlayer.prototype.fileFindById = function(id) {
 MusicPlayer.prototype.nowSong = function() {
     var songInfo = this.fileFindById(this.nowId)
     return songInfo
+}
+
+// 66666666
+MusicPlayer.prototype.addTime = function(len=this.songs.length) {
+    $('audio')[0].src = 'song/' + this.songs[len - 1].path
+    var playerAddTime = this
+    $('audio').on('canplay', function(){
+        playerAddTime.songs[len - 1].time = this.duration
+        $('audio').unbind('canplay')
+        if(len != 1) {
+            playerAddTime.addTime(len-1)
+        }
+    })
 }
 
 var playLoopPrev = function() {
@@ -73,6 +87,7 @@ var prevSong = function(element) {
     }
     var type = player.playMode
     mode[type]()
+    changePlayLogo(player.nowId)
 }
 
 var nextSong = function(element) {
@@ -85,6 +100,7 @@ var nextSong = function(element) {
     }
     var type = player.playMode
     mode[type]()
+    changePlayLogo(player.nowId)
 }
 
 var playSong = function() {
@@ -93,6 +109,7 @@ var playSong = function() {
     $('.BBg-contLeft-pause').addClass('fa-pause-circle-o')
     $('.BBg-contLeft-pause').data('action', 'pause')
     $('audio')[0].autoplay = true
+    changePlayLogo(player.nowId)
 }
 
 var pauseSong = function() {
@@ -101,6 +118,7 @@ var pauseSong = function() {
     $('.BBg-contLeft-pause').addClass('fa-play-circle-o')
     $('.BBg-contLeft-pause').data('action', 'play')
     $('audio')[0].autoplay = false
+    changePlayLogo(player.nowId)
 }
 
 var timeFormatBySecs = function(seconds) {
@@ -211,6 +229,7 @@ var bindLike = function() {
 }
 
 var bindEnd = function() {
+    log('end')
     $('audio').on('ended', function(){
         // pauseSong()
         nextSong()
@@ -257,6 +276,18 @@ var bindModeButton = function() {
     })
 }
 
+var bindListPlay = function() {
+    $('.BBg-music-contaniner').on('click', '.BBg-listSong-play', function(){
+        var song = this.parentElement
+        var idElement = song.children[0]
+        var id = $(idElement).text() - 1
+        player.nowId = id
+        initMusicPlayer()
+        // log($('audio')[0].autoplay)
+        playSong()
+    })
+}
+
 var bindEvents = function() {
     bindPlayerContLeft()
     bindSlideBar()
@@ -266,6 +297,7 @@ var bindEvents = function() {
     bindVolSlideBar()
     bindVolButton()
     bindModeButton()
+    bindListPlay()
 }
 
 var initMusicPlayer = function() {
@@ -284,6 +316,43 @@ var initMusicPlayer = function() {
         $('.BBg-music-timeIndica').html(`<span class="BBg-music-curTime">0:00</span>/${d}`)
         bindTimeUpdate()
     })
+}
+
+var templetOfList = function(type, id, song, time, singer) {
+    var t = `
+            <div class="BBg-music-listSong ${type}">
+                <span class="BBg-listSong-id">${id}</span>
+                <i class="BBg-listSong-play fa fa-play-circle-o"></i>
+                <span class="BBg-listSong-song">${song}</span>
+                <span class="BBg-listSong-time">${time}</span>
+                <span class="BBg-listSong-singer">${singer}</span>
+            </div>
+    `
+    return t
+}
+
+var changePlayLogo = function(id) {
+    $('.BBg-listSong-play').removeClass('nowPlaying')
+    $($('.BBg-music-contaniner').children()[id + 2].children[1]).addClass('nowPlaying')
+}
+
+var initMusicList = function() {
+    // player.addTime()
+    var len = player.songs.length
+    for (var i = 0; i < len; i++) {
+        var s = player.songs[i]
+        // log(s)
+        var id = s.id + 1
+        if(id % 2 == 1) {
+            type = 'odd'
+        } else {
+            type = 'even'
+        }
+        var time = timeFormatBySecs(s.time)
+        var t = templetOfList(type, id, s.name, time, s.singer)
+        $('.BBg-music-contaniner').append(t)
+    }
+    $('.BBg-dir-nums').text(`${len}首歌`)
 }
 
 var s0 = {
@@ -329,6 +398,12 @@ var player = new MusicPlayer(files)
 
 var musicPlayer = function() {
     initMusicPlayer()
+
+    player.addTime()
+
+    setTimeout('initMusicList()', 600)
+
+    // initMusicList()
 
     bindEvents()
 

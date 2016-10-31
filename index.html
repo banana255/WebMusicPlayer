@@ -28,11 +28,14 @@ a.currentTime
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <title>MUSIC Player</title>
         <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
         <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
         <link rel="stylesheet" href="music.css" media="screen" title="no title">
         <script src="music.js"></script>
+        <!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
         <script>
             $('document').ready(function(){
                 var __main = musicPlayer
@@ -81,15 +84,63 @@ a.currentTime
             </div>
         </div>
 
+        <!-- <nav class="navbar navbar-light bg-faded">
+            <a class="navbar-brand" href="#">BigBananas</a>
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com"  id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline float-xs-right">
+                <input class="form-control" type="text" placeholder="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </nav> -->
 
-
-
-
-
-
-
-
-
-
+        <nav class="BBg-music-nav">
+            <a class="BBg-music-title" href="#">BigBananas</a>
+        </nav>
+        <div class="BBg-music-contaniner">
+            <div class="BBg-music-dir">
+                <span class="BBg-dir-title">歌曲列表</span>
+                <span class="BBg-dir-nums"></span>
+                <span class="BBg-dir-flag">播放： <span class="BBg-dir-times">13</span>次</span>
+            </div>
+            <div class="BBg-dir-info">
+                <div class="BBg-dir-info-blank">
+                     &nbsp;
+                </div>
+                <div class="BBg-dir-info-name">
+                    歌曲标题
+                </div>
+                <div class="BBg-dir-info-time">
+                    时长
+                </div>
+                <div class="BBg-dir-info-singer">
+                    歌手
+                </div>
+            </div>
+            <!-- <div class="BBg-music-listSong odd" >
+                    <span class="BBg-listSong-id">1</span>
+                    <i class="BBg-listSong-play fa fa-play-circle-o"></i>
+                    <span class="BBg-listSong-song">Shall We Dance</span>
+                    <span class="BBg-listSong-time">03:42</span>
+                    <span class="BBg-listSong-singer">Eason</span>
+            </div> -->
+        </div>
     </body>
 </html>
