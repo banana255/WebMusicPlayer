@@ -34,7 +34,7 @@ MusicPlayer.prototype.nowSong = function() {
     return songInfo
 }
 
-// 66666666
+// 添加时间
 MusicPlayer.prototype.addTime = function(len=this.songs.length) {
     $('audio')[0].src = 'song/' + this.songs[len - 1].path
     var playerAddTime = this
