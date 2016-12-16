@@ -192,12 +192,32 @@ var bindPlayerContLeft = function(){
 
 var bindSlideBar = function() {
     $('#id-input-SlideBar').on('input', function(){
-        log('range')
         var value = $(this).val()
+        log('range', value)
         var curTime = value * $('audio')[0].duration / 100
         $('audio')[0].currentTime = curTime
         setport(this, value)
         setCurTime(value)
+    })
+}
+
+var bindSlideBarFocus = function() {
+    log('focus')
+    $('#id-input-SlideBar').on('mousedown', function(){
+        $('audio').unbind('ended')
+        log('focus')
+    })
+}
+
+var bindSlideBarBlur = function() {
+    log('blur')
+    $('#id-input-SlideBar').on('mouseup', function(){
+        log('blur')
+        var value = $('#id-input-SlideBar').val()
+        if(value == 100) {
+            nextSong()
+        }
+        bindEnd()
     })
 }
 
@@ -229,9 +249,9 @@ var bindLike = function() {
 }
 
 var bindEnd = function() {
-    log('end')
     $('audio').on('ended', function(){
         // pauseSong()
+        log('end')
         nextSong()
     })
 }
@@ -298,12 +318,29 @@ var bindEvents = function() {
     bindVolButton()
     bindModeButton()
     bindListPlay()
+    bindSlideBarFocus()
+    bindSlideBarBlur()
+}
+
+var changeLikeLogo = function(like) {
+    var target = $('.BBg-contRight-like')
+    if (like) {
+        log('like true')
+        target.removeClass('fa-heart-o')
+        target.addClass('fa-heart')
+    } else {
+        log('like false')
+        target.addClass('fa-heart-o')
+        target.removeClass('fa-heart')
+    }
 }
 
 var initMusicPlayer = function() {
     var song = player.nowSong().name
     var singer = player.nowSong().singer
     var path = player.nowSong().path
+    var like = player.nowSong().like
+    changeLikeLogo(like)
     $('.BBg-music-song').text(song)
     $('.BBg-music-singer').text(singer)
     $('audio')[0].src = `song/${path}`
@@ -406,6 +443,5 @@ var musicPlayer = function() {
     // initMusicList()
 
     bindEvents()
-
 
 }

@@ -1,29 +1,3 @@
-<!-- 带控制器的视频标签, 不同浏览器有不同的文件格式要求
-所以用 2 个 source 标签指定不同的视频格式
-<video width="300" height="200" controls="controls">
-    <source src="movie.mp4">
-    <source src="movie.ogv">
-</video>
-
-
-带控制器的音频标签, 不同浏览器有不同的文件格式要求
-所以用 2 个 source 标签指定不同的音频格式
-<audio id='id-audio-player' controls="controls">
-  <source src="audio.ogg">
-  <source src="audio.mp3">
-</audio >
-
-
-audio 基本操作如下
-var a = document.querySelector('#id-audio-player')
-a.play()
-a.pause()
-a.autoplay
-a.src
-a.volume [0-1]
-a.duration time: 秒
-a.currentTime
-<audio src="Australia.ogg"></audio>-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,8 +8,6 @@ a.currentTime
         <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
         <link rel="stylesheet" href="music.css" media="screen" title="no title">
         <script src="music.js"></script>
-        <!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
         <script>
             $('document').ready(function(){
                 var __main = musicPlayer
@@ -69,7 +41,6 @@ a.currentTime
                     <div class="BBg-music-bar">
                         <div class="BBg-music-range">
                             <input id="id-input-SlideBar" type="range" name="name" min=0 max=100 value=0 step="0.25">
-                            <!-- <portport></portport> -->
                         </div>
                         <span class="BBg-music-timeIndica"><span class="BBg-music-curTime">0:00</span>/4:00</span>
                     </div>
@@ -84,33 +55,6 @@ a.currentTime
             </div>
         </div>
 
-        <!-- <nav class="navbar navbar-light bg-faded">
-            <a class="navbar-brand" href="#">BigBananas</a>
-            <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com"  id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-            <form class="form-inline float-xs-right">
-                <input class="form-control" type="text" placeholder="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        </nav> -->
-
         <nav class="BBg-music-nav">
             <a class="BBg-music-title" href="#">BigBananas</a>
         </nav>
@@ -122,7 +66,7 @@ a.currentTime
             </div>
             <div class="BBg-dir-info">
                 <div class="BBg-dir-info-blank">
-                     &nbsp;
+                     <!-- &nbsp; -->
                 </div>
                 <div class="BBg-dir-info-name">
                     歌曲标题

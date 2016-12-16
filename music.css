@@ -25,10 +25,16 @@ body {
     margin: 0 auto;
     height: inherit;
     width: 800px;
+    font-size: 0px;
 }
 
 .BBg-music-contMargin-i:hover {
     text-shadow:0px 0px 3px #e4e4e4;
+}
+
+.BBg-music-contLeft,
+.BBg-music-contRight {
+    font-size: 20px;
 }
 
 .BBg-music-contLeft {
@@ -84,6 +90,7 @@ body {
     display: block;
     float: left;
     margin-top: 5px;
+    /*margin-left: 20px;*/
     font-size: 15px;
 }
 
@@ -107,6 +114,8 @@ a {
 
 .BBg-music-range {
     display: inline-block;
+    position: relative;
+    left: -15px;
 }
 
 #id-input-vol,
@@ -253,7 +262,7 @@ a {
     display: inline-block;
     background: #fff;
     width: 800px;
-    height: 800px;
+    /*height: 800px;*/
 }
 
 .BBg-music-dir {
@@ -325,11 +334,11 @@ a {
     font-size: 12px;
     color: #737373;
     margin-left: 2px;
+    vertical-align: bottom;
 }
 
 .BBg-dir-info-blank {
     /*width:98px;*/
-    height: 15px;
     width: 10%;
 }
 
